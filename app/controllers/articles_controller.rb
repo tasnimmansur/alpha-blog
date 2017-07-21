@@ -8,7 +8,6 @@ class ArticlesController <ApplicationController
     @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
-
   def new
     @article = Article.new
   end
@@ -46,7 +45,6 @@ class ArticlesController <ApplicationController
   end
 
   private
-
   def set_article
     @article = Article.find(params[:id])
   end
