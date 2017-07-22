@@ -10,7 +10,7 @@ Things you may want to cover:
 
 * For Ruby Console : Rails console
 
-* For Fetch database : run rake db:migrate
+* For Fetch database : rake db:migrate
 
 * For run on server : rails server  
 
