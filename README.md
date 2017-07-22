@@ -16,4 +16,4 @@ Things you may want to cover:
 
 /* By default it runs on port 3000, if you want to run on other port do, 
 
--> rails server -p port_no
+-> rails server -p port_no */
