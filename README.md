@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
 Things you may want to cover:
 
-* Ruby version
+* Ruby version : 2.3.0p0
 
-* System dependencies
+* Rails version : 5.1.2
 
-* Configuration
+* sqlite version : 3.8.2
 
-* Database creation
+* For Ruby Console : Rails console
 
-* Database initialization
+* For Fetch database : rake db:migrate
 
-* How to run the test suite
+* For run on server : rails server  
 
-* Services (job queues, cache servers, search engines, etc.)
+/* By default it runs on port 3000, if you want to run on other port do, 
 
-* Deployment instructions
-
-* ...
+-> rails server -p port_no */
