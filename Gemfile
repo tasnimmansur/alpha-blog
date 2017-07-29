@@ -26,7 +26,11 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
+
 gem 'carrierwave'
+gem 'mini_magick',             '4.7.0'
+gem 'fog',                     '1.40.0'
+
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
@@ -48,8 +52,7 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   #gem 'carrierwave',             '1.1.0'
-  gem 'mini_magick',             '4.7.0'
-  gem 'fog',                     '1.40.0'
+
 end
 
 group :development do
