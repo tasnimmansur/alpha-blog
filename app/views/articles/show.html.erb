@@ -19,7 +19,10 @@
   <% end %>
 
   <h4 class="center description"><strong>Description:</strong></h4>
-  <hr>
+
+  <div class="article-image-details" >
+    <%= image_tag @article.picture.url if @article.picture? %>
+  </div>
 
   <%= simple_format(@article.description) %>
 
