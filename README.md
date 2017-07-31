@@ -6,7 +6,9 @@ Things you may want to cover:
 
 * Rails version : 5.1.2
 
-* sqlite version : 3.8.2
+// In development mode :-
+
+* sqlite version : 3.8.2 
 
 * For Ruby Console : Rails console
 
@@ -14,6 +16,9 @@ Things you may want to cover:
 
 * For run on server : rails server  
 
-/* By default it runs on port 3000, if you want to run on other port do, 
+// In Production Mode :-
 
--> rails server -p port_no */
+* Databse : Postgresql
+* For console : heroku rake console
+* push on heroku : git push heroku master
+* For fetch database : heroku run rake db: migrate
