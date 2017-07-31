@@ -10,6 +10,10 @@
             <%= image_tag article.picture.url if article.picture? %>
           </div>
 
+          <!--<div class="article-meta-details">
+            #video_tag article.video_url if article.video? %>
+          </div>-->
+
           <div class="article-body">
             <%= truncate(article.description, length: 100) %>
 
