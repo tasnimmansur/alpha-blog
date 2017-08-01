@@ -7,12 +7,14 @@
           </div>
 
           <div class="article-image-details">
-            <%= image_tag article.picture.url if article.picture? %>
+            <%= (image_tag article.picture.url, size: "275x200") if article.picture? %>
           </div>
 
           <!--<div class="article-meta-details">
-            #video_tag article.video_url if article.video? %>
+            #video_tag article.video_url(:medium), controls: true, type: "video/mp4" if article.video? %>
           </div>-->
+
+          <%#video_tag @post.video.url(:medium), controls: true, type: "video/mp4" %>
 
           <div class="article-body">
             <%= truncate(article.description, length: 100) %>
