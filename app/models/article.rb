@@ -7,4 +7,10 @@ class Article <ActiveRecord::Base
   validates :title, presence: true, length: {minimum: 3, maximum: 50}
   validates :description, presence: true, length: {minimum: 10, maximum: 5000}
   validates :user_id, presence: true
+  default_scope -> { order(updated_at: :desc)}
+  acts_as_votable
+
+  #def score
+   # self.get_upvotes.size - self.get_downvotes.size
+  #end
 end

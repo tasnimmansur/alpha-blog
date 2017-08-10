@@ -26,6 +26,7 @@ class ArticlesController <ApplicationController
     end
   end
 
+
   def update
     if @article.update(article_params)
       flash[:success] = "Article was successfully updated"
@@ -41,6 +42,18 @@ class ArticlesController <ApplicationController
   def destroy
     @article.destroy
     flash[:danger] = "Article was successfully deleted"
+    redirect_to articles_path
+  end
+
+  def upvote
+    @article = Article.find(params[:id])
+    @article.upvote_by current_user
+    redirect_to articles_path
+  end
+
+  def downvote
+    @article = Article.find(params[:id])
+    @article.downvote_by current_user
     redirect_to articles_path
   end
 

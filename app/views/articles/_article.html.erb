@@ -39,7 +39,20 @@
                           class: "btn btn-xs btn-danger" %>
             </div>
           <% end %>
+
+          <div class="article-body">
+            <%= link_to like_article_path(article), method: :put do %>
+                <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;
+                <%= article.get_upvotes.size %>
+            <% end %>&nbsp;&nbsp;
+            <%= link_to dislike_article_path(article), method: :put do %>
+                <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp;
+                <%= article.get_downvotes.size %>
+            <% end %>
+          </div>
+
         </div>
       </div>
     </div>
+
 <% end %>
