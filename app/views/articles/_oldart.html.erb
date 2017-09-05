@@ -1,0 +1,109 @@
+<section id="sliderSection">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <% obj.each do |article| %>
+          <div class="slick_slider">
+            <div class="single_iteam">
+              <%= link_to article_path(article) do %>
+                  <%= image_tag (article.picture.url) if article.picture? %>
+              <% end %>
+
+              <div class="slider_article">
+                <h2><%= link_to article.title, article_path(article), class: "slider_tittle" %></h2>
+                <p><%= article.user.username if article.user %>  -
+                  <span class="quiet"><small><%= time_ago_in_words(article.created_at) %> ago</small></span>
+                </p><br/>
+                <p><%= truncate article.description, length:100 %></p><br/>
+
+                <div class="article-body-like" style="color: #ffffff">
+                  <%= link_to like_article_path(article), method: :put do %>
+                      <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;
+                      <%= article.get_upvotes.size %>
+                  <% end %>&nbsp;&nbsp;
+                  <%= link_to dislike_article_path(article), method: :put do %>
+                      <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp;
+                      <%= article.get_downvotes.size %>
+                  <% end %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="latest_post">
+        <h2><span>Latest News</span></h2>
+        <div class="latest_post_container">
+          <ul class="latest_postnav">
+            <li>
+              <% obj.each do |art| %>
+                  <div class="row" style="margin-bottom: 10px">
+                    <div class="media col-md-4">
+                      <%= link_to article_path(art) do %>
+                          <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                      <% end %>
+                    </div>
+                    <div class="col-md-8" style="padding: 0;"><h4><%= link_to art.title, article_path(art) %></h4></div>
+                  </div>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="latest_post">
+        <h2><span>Popular News</span></h2>
+        <div class="latest_post_container">
+          <ul class="latest_postnav">
+            <li>
+              <% obj.each do |art| %>
+                  <div class="row" style="margin-bottom: 10px">
+                    <div class="media col-md-4">
+                      <%= link_to article_path(art) do %>
+                          <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                      <% end %>
+                    </div>
+                    <div class="col-md-8" style="padding: 0;"><h4><%= link_to art.title, article_path(art) %></h4></div>
+                  </div>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,37 +1,55 @@
 <% obj.each do |article| %>
     <div class="row">
-      <div class="col-md-2">
-        <section class="chef-info center">
-          <%= link_to gravatar_for(article.user, size: 100), user_path(article.user) %>
-          <h5> User Name: <%= article.user.username if article.user %></h5>
-        </section>
-      </div>
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="well well-lg">
+          <div class="article-title">
+            <%= link_to article.title, article_path(article) %>
+          </div>
 
-      <div class="col-lg-6 well">
-        <h4><%= link_to article.title, article_path(article)%></h4>
-        <p><%= truncate(article.description, length: 500) %></p>
+          <div class="article-image-details">
+            <%= (image_tag article.picture.url, size: "275x200") if article.picture? %>
+          </div>
 
-        <% if article.categories.any? %>
-            <p>Categories: <%= render article.categories %></p>
-        <% end %>
+          <!--<div class="article-meta-details">
+            #video_tag article.video_url(:medium), controls: true, type: "video/mp4" if article.video? %>
+          </div>-->
 
-        <p>
-          <span class="quiet"><small> created: <%= time_ago_in_words(article.created_at) %> ago,</small></span>
-          <span class="quiet"><small> updated: <%= time_ago_in_words(article.updated_at) %> ago</small></span>
-        </p>
+          <%#video_tag @post.video.url(:medium), controls: true, type: "video/mp4" %>
 
-        <% if logged_in? && (current_user == article.user || current_user.admin?) %>
-            <div class="article-actions">
-              <%= link_to "Edit this Article", edit_article_path(article), class: "btn btn-xs btn-primary" %>
-              <%= link_to "Delete this article", article_path(article), method: :delete,
-                          data: {confirm: "Are you sure you want to delete the article?"},
-                          class: "btn btn-xs btn-danger" %>
+          <div class="article-body">
+            <%= truncate(article.description, length: 100) %>
+            <div class="article-meta-details">
+              <small>Created by: <%= article.user.username if article.user %>,
+                <%= time_ago_in_words(article.created_at) %> ago,
+                last_updated: <%= time_ago_in_words(article.updated_at) %> ago
+              </small>
             </div>
-        <% end %>
+          </div>
 
-      </div>
-      <div class="col-md-4" >
-        <%= image_tag(article.picture.url, size: "250x150") if article.picture? %>
+          <% if article.categories.any? %>
+              <p>Categories: <%= render article.categories %></p>
+          <% end %>
+
+          <% if logged_in? && (current_user == article.user || current_user.admin?) %>
+              <div class="article-actions">
+                <%= link_to "Edit this Article", edit_article_path(article), class: "btn btn-xs btn-primary" %>
+                <%= link_to "Delete this article", article_path(article), method: :delete,
+                            data: {confirm: "Are you sure you want to delete the article?"},
+                            class: "btn btn-xs btn-danger" %>
+              </div>
+          <% end %>
+
+          <div class="article-body">
+            <%= link_to like_article_path(article), method: :put do %>
+                <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;
+                <%= article.get_upvotes.size %>
+            <% end %>&nbsp;&nbsp;
+            <%= link_to dislike_article_path(article), method: :put do %>
+                <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp;
+                <%= article.get_downvotes.size %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-sm-8">
-              <%= f.text_field :title, class: "form-control", placeholder: "Title of Article", autofocus: true %>
+              <%= f.text_field :title, class: "form-control", placeholder: "Title of News", autofocus: true %>
             </div>
           </div>
 
@@ -19,7 +19,7 @@
           </div>
 
           <div class="col-sm-8">
-              <%= f.text_area :description,rows:10, class: "form-control", placeholder: "Description of Article" %>
+              <%= f.text_area :description,rows:10, class: "form-control", placeholder: "Description of News" %>
           </div>
         </div>
 
@@ -33,25 +33,26 @@
           </div>
         </div>
 
+
         <div class="form-group">
-          <div class="rows">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="picture">
-                <%= f.file_field :picture %>
-              </div>
-            </div>
+          <div class="control-label col-sm-2">
+            <%= f.label :Image %>
+          </div>
+
+          <div class="col-sm-8">
+            <%= f.file_field :picture %>
           </div>
         </div>
 
-        <!--<div class="form-group">
-          <div class="rows">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="video">
-                #f.file_field :video%>
-              </div>
-            </div>
+        <div class="form-group">
+          <div class="control-label col-sm-2">
+            <%= f.label :Video %>
           </div>
-        </div>-->
+
+          <div class="col-sm-8">
+            <%= f.file_field :video %>
+          </div>
+        </div>
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
@@ -62,7 +63,7 @@
     <% end %>
 
     <div class="col-xs-4 col-xs-offset-4">
-      [ <%= link_to "cancel request and return to articles listing", articles_path %> ]
+      [ <%= link_to "Cancel request and return to News Listing", articles_path %> ]
     </div>
   </div>
 </div>

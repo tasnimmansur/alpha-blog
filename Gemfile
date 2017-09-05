@@ -5,7 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'refile', require: 'refile/rails', github: 'refile/refile'
+gem 'refile-mini_magick'
+gem 'refile-s3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 gem 'bcrypt', '~> 3.1.7'
@@ -33,6 +35,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'acts_as_votable'
+gem 'acts_as_commentable_with_threading'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -51,6 +54,8 @@ group :development, :test do
   #gem 'carrierwave',             '1.1.0'
   gem 'mini_magick',             '4.7.0'
   gem 'fog',                     '1.40.0'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do

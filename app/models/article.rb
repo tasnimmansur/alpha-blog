@@ -4,8 +4,8 @@ class Article <ActiveRecord::Base
   has_many :categories, through: :article_categories
   mount_uploader :picture, PictureUploader
   mount_uploader :video, VideoUploader
-  validates :title, presence: true, length: {minimum: 3, maximum: 50}
-  validates :description, presence: true, length: {minimum: 10, maximum: 5000}
+  validates :title, presence: true, length: {minimum: 3, maximum: 5000}
+  validates :description, presence: true, length: {minimum: 10, maximum: 100000}
   validates :user_id, presence: true
   default_scope -> { order(updated_at: :desc)}
   acts_as_votable
@@ -13,4 +13,12 @@ class Article <ActiveRecord::Base
   #def score
    # self.get_upvotes.size - self.get_downvotes.size
   #end
+
+  def self.search(search)
+    if search.present?
+      Article.where('title LIKE ?', "%#{search}%")
+    else
+      Article.all
+    end
+  end
 end

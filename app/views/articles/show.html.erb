@@ -1,44 +1,61 @@
-<h2 align="center">Title: <%= @article.title %></h2>
+<section id="contentSection">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <div class="left_content">
+        <div class="single_page">
+          <ol class="breadcrumb">
+            <li><%= link_to "Home", root_path %></li>
+            <li><%= render @article.categories %></li>
+          </ol>
+          <h1><%= @article.title %></h1>
+          <div class="post_commentbox"><i class="fa fa-user"><%= link_to @article.user.username, user_path(@article.user) %></i><span><i class="fa fa-calendar"></i><%= time_ago_in_words(@article.created_at) %> ago</span><i class="fa fa-tags"></i><%= render @article.categories %></a> </div>
+          <div class="single_page_content"><%= (image_tag @article.picture.url, size: "275x200", class: "img-center") if @article.picture? %>
+            <blockquote><%= @article.description %></blockquote>
+          </div>
 
-<div class="well col-xs-8 col-xs-offset-2">
-  <% if @article.user %>
-      <ul class="listing">
-        <div class="row center">
-          <div class="col-md-4 col-md-offset-4">
-            <li>Created by:</li>
-            <li><%= link_to gravatar_for(@article.user), user_path(@article.user) %></li>
-            <li class="article-title">
-              <%= link_to @article.user.username, user_path(@article.user) %>
-            </li>
-            <li><small>
-              <%= pluralize(@article.user.articles.count, "article") if @article.user.articles %>
-            </small></li>
+          <div class="single_page_content">
+            <%= (video_tag @article.video.url, controls: true, type: ["video/mp4", "video/mp3", "video/mkv", "video/3gp"]) if @article.video? %>
+          </div>
+
+          <div class="article-actions">
+            <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
+                <%= link_to "Edit this News", edit_article_path(@article), class: "btn btn-xs btn-primary" %>
+                <%= link_to "Delete this News", article_path(@article), method: :delete,
+                            data: { confirm: "Are you sure you want to delete the article?"},
+                            class: "btn btn-xs btn-danger" %>
+            <% end %>
+
+            <%= link_to "View all News", articles_path, class: "btn btn-xs btn-success" %>
           </div>
         </div>
-      </ul>
-  <% end %>
+      </div>
+    </div>
 
-  <h4 class="center description"><strong>Description:</strong></h4>
-
-  <div class="article-image-details">
-    <%= (image_tag @article.picture.url, size: "275x200") if @article.picture? %>
-
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <aside class="right_content">
+        <div class="single_sidebar">
+          <h2><span>Latest News</span></h2>
+          <ul class="spost_nav latest_postnav">
+            <li>
+              <% @articles.each.with_index do |art, index| %>
+                  <% if index != 0 %>
+                    <li>
+                      <div class="row" style="margin-bottom: 10px">
+                        <div class="media col-md-4">
+                          <%= link_to article_path(art) do %>
+                              <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                          <% end %>
+                        </div>
+                        <div class="col-md-8" style="padding: 0;"><h4><%= link_to art.title, article_path(art) %></h4></div>
+                      </div>
+                    </li>
+                <% end %>
+            <% end %>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
   </div>
+</section>
 
-  <%= simple_format(@article.description) %>
-
-  <% if @article.categories.any? %>
-      <p>Categories: <%= render @article.categories %></p>
-  <% end %>
-
-  <div class="article-actions">
-    <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
-      <%= link_to "Edit this article", edit_article_path(@article), class: "btn btn-xs btn-primary" %>
-      <%= link_to "Delete this article", article_path(@article), method: :delete,
-                  data: { confirm: "Are you sure you want to delete the article?"},
-                  class: "btn btn-xs btn-danger" %>
-    <% end %>
-
-    <%= link_to "View all articles", articles_path, class: "btn btn-xs btn-success" %>
-  </div>
-</div>

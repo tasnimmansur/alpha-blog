@@ -1,58 +1,109 @@
-<% obj.each do |article| %>
-    <div class="row">
-      <div class="col-xs-8 col-xs-offset-2">
-        <div class="well well-lg">
-          <div class="article-title">
-            <%= link_to article.title, article_path(article) %>
-          </div>
+<section id="sliderSection">
+  <div class="row">
+    <% @articles.in_groups(2,false).each do |group| %>
+        <div class="col-lg-4 col-md-4 col-sm-4">
 
-          <div class="article-image-details">
-            <%= (image_tag article.picture.url, size: "275x200") if article.picture? %>
-          </div>
+          <% group.each do |article| %>
+              <div class="slick_slider">
+                <div class="single_iteam">
+                  <%= link_to article_path(article) do %>
+                      <%= image_tag (article.picture.url) if article.picture? %>
+                  <% end %>
 
-          <!--<div class="article-meta-details">
-            #video_tag article.video_url(:medium), controls: true, type: "video/mp4" if article.video? %>
-          </div>-->
+                  <div class="slider_article">
+                    <h2><%= link_to article.title, article_path(article), class: "slider_tittle" %></h2>
+                    <p><%= article.user.username if article.user %>  -
+                      <span class="quiet"><small><%= time_ago_in_words(article.created_at) %> ago</small></span>
+                    </p><br/>
+                    <p><%= truncate article.description, length:75 %></p><br/>
 
-          <%#video_tag @post.video.url(:medium), controls: true, type: "video/mp4" %>
-
-          <div class="article-body">
-            <%= truncate(article.description, length: 100) %>
-
-            <div class="article-meta-details">
-              <small>Created by: <%= article.user.username if article.user %>,
-                <%= time_ago_in_words(article.created_at) %> ago,
-                last_updated: <%= time_ago_in_words(article.updated_at) %> ago
-              </small>
-            </div>
-          </div>
-
-          <% if article.categories.any? %>
-              <p>Categories: <%= render article.categories %></p>
+                    <div class="article-body-like">
+                      <%= link_to like_article_path(article), method: :put do %>
+                          <i class="glyphicon glyphicon-thumbs-up" style="color: white"></i>&nbsp;
+                          <b style="color: white"><%= article.get_upvotes.size %></b>
+                      <% end %>&nbsp;&nbsp;
+                      <%= link_to dislike_article_path(article), method: :put do %>
+                          <i class="glyphicon glyphicon-thumbs-down" style="color: white"></i>&nbsp;
+                          <b style="color: white"><%= article.get_downvotes.size %></b>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
           <% end %>
+        </div>
+    <% end %>
 
-          <% if logged_in? && (current_user == article.user || current_user.admin?) %>
-            <div class="article-actions">
-              <%= link_to "Edit this Article", edit_article_path(article), class: "btn btn-xs btn-primary" %>
-              <%= link_to "Delete this article", article_path(article), method: :delete,
-                          data: {confirm: "Are you sure you want to delete the article?"},
-                          class: "btn btn-xs btn-danger" %>
-            </div>
-          <% end %>
-
-          <div class="article-body">
-            <%= link_to like_article_path(article), method: :put do %>
-                <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;
-                <%= article.get_upvotes.size %>
-            <% end %>&nbsp;&nbsp;
-            <%= link_to dislike_article_path(article), method: :put do %>
-                <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp;
-                <%= article.get_downvotes.size %>
-            <% end %>
-          </div>
-
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="latest_post">
+        <h2><span>Latest News</span></h2>
+        <div class="latest_post_container">
+          <ul class="latest_postnav">
+            <li>
+              <% obj.each do |art| %>
+                  <div class="row" style="margin-bottom: 10px">
+                    <div class="media col-md-4">
+                      <%= link_to article_path(art) do %>
+                          <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                      <% end %>
+                    </div>
+                    <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+                  </div>
+              <% end %>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-<% end %>
+
+<section id="sliderSection">
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-8">
+      <div class="latest_post">
+        <h2><span>Videos</span></h2>
+        <% obj.in_groups_of(2,false).each do |group| %>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <% group.each do |article| %>
+                  <div class="slick_slider">
+                    <div class="single_iteam" style="height: 200px; width: 250px;">
+                      <%= (video_tag article.video.url, controls: true, type: "video/mp4", height: '200', width: '330') if article.video? %>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-4">
+      <div class="latest_post">
+        <h2><span>Latest Videos</span></h2>
+        <div class="latest_post_container">
+          <ul class="latest_postnav">
+            <li>
+              <% obj.each do |art| %>
+                  <% if art.video? %>
+                      <div class="row" style="margin-bottom: 10px">
+                        <div class="media col-md-4">
+                          <%= link_to article_path(art) do %>
+                              <%= video_tag(art.video.url, height: '85', width: '100') if art.video?%>
+                          <% end %>
+                        </div>
+                        <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+                      </div>
+                  <% end %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

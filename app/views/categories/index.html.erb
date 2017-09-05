@@ -1,17 +1,49 @@
-<h1 align="center">Listing All Categories</h1>
-<div align="center">
-  <%= will_paginate %>
-  <% @categories.each do |category| %>
-      <ul class="listing">
-        <div class="row">
-          <div class="well col-md-4 col-md-offset-4">
-            <li class="article-title">
-              <%= link_to "#{category.name}", category_path(category) %>
-            </li>
-            <li><small><%= pluralize(category.article.count, "article") %></small></li>
-          </div>
+<section id="sliderSection">
+
+  <h1 align="center">Categories</h1>
+
+  <% @categories.in_groups_of(3, false).each do |obj|%>
+    <ul class="listing">
+      <div class="row">
+        <div class="cat_team">
+          <% obj.each do |category| %>
+            <div class="well col-md-3" style="margin-top: 50px; margin-right: 75px" align="center">
+              <li class="article-title">
+
+                <%= link_to category_path(category) do %>
+
+                  <% if category.name == 'Social' %>
+                    <%= image_tag("socialnews.png", :alt => "social.png") %>
+
+                  <% elsif category.name == 'Business' %>
+                     <%= image_tag("businessnews.jpg", :alt => "businessnews.jpg") %>
+
+                  <% elsif category.name == 'Sports' %>
+                    <%= image_tag("sportsnews.jpg", :alt => "sportsnews.jpg", height: "85px") %>
+
+                  <% elsif category.name == 'Technology' %>
+                    <%= image_tag("techno.jpg", :alt => "teco.jpg") %>
+
+                  <% elsif category.name == 'Fashion' %>
+                    <%= image_tag("fashion.jpg", :alt => "fashionnews.jpg") %>
+
+                  <% else %>
+                    <%= image_tag("lifestyle.jpg", size: '50x50') %>
+
+                  <% end %>
+                <% end %>
+                <%= link_to "#{category.name}", category_path(category) %>
+              </li>
+              <li><small><%= pluralize(category.article.count, "article") %></small></li>
+            </div>
+          <% end %>
         </div>
-      </ul>
+      </div>
+    </ul>
   <% end %>
-  <%= will_paginate %>
-</div>
+
+  <div align="center">
+    <%= will_paginate %>
+  </div>
+
+</section>

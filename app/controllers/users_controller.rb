@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:destroy]
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 3)
+    @users = User.paginate(page: params[:page], per_page: 12)
   end
 
   def new
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = "Welcome to the alpha blog #{@user.username}"
-      redirect_to user_path(@user)
+      redirect_to articles_path
     else
       render 'new'
     end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
+    @user_articles = @user.articles.paginate(page: params[:page], per_page: 6)
   end
 
   def destroy
