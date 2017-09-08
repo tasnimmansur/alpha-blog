@@ -9,7 +9,8 @@
           </ol>
           <h1><%= @article.title %></h1>
           <div class="post_commentbox"><i class="fa fa-user"><%= link_to @article.user.username, user_path(@article.user) %></i><span><i class="fa fa-calendar"></i><%= time_ago_in_words(@article.created_at) %> ago</span><i class="fa fa-tags"></i><%= render @article.categories %></a> </div>
-          <div class="single_page_content"><%= (image_tag @article.picture.url, size: "275x200", class: "img-center") if @article.picture? %>
+          <div class="single_page_content">
+            <%= (image_tag @article.picture.url, size: "275x200", class: "img-center") if @article.picture? %>
             <blockquote><%= @article.description %></blockquote>
           </div>
 
@@ -35,11 +36,9 @@
       <aside class="right_content">
         <div class="single_sidebar">
           <h2><span>Latest News</span></h2>
-          <ul class="spost_nav latest_postnav">
-            <li>
+          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="600">
               <% @articles.each.with_index do |art, index| %>
                   <% if index != 0 %>
-                    <li>
                       <div class="row" style="margin-bottom: 10px">
                         <div class="media col-md-4">
                           <%= link_to article_path(art) do %>
@@ -48,11 +47,9 @@
                         </div>
                         <div class="col-md-8" style="padding: 0;"><h4><%= link_to art.title, article_path(art) %></h4></div>
                       </div>
-                    </li>
                 <% end %>
             <% end %>
-            </li>
-          </ul>
+          </marquee>
         </div>
       </aside>
     </div>

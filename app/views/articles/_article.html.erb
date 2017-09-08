@@ -38,25 +38,40 @@
       <div class="latest_post">
         <h2><span>Latest News</span></h2>
         <div class="latest_post_container">
-          <ul class="latest_postnav">
+          <!--<ul>
             <li>
-              <% obj.each do |art| %>
+              <#% obj.each do |art| %>
                   <div class="row" style="margin-bottom: 10px">
                     <div class="media col-md-4">
-                      <%= link_to article_path(art) do %>
-                          <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
-                      <% end %>
+                      <%#= link_to article_path(art) do %>
+                          <%#= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                      <#% end %>
                     </div>
-                    <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+                    <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%#= link_to art.title, article_path(art) %></h4></i></b></div>
                   </div>
-              <% end %>
+              <#% end %>
             </li>
           </ul>
+          <ul>-->
+          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="400">
+            <% obj.each do |art| %>
+              <div class="row" style="margin-bottom: 10px">
+                <div class="media col-md-4">
+                  <%= link_to article_path(art) do %>
+                    <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                  <% end %>
+                </div>
+                <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+              </div>
+            <% end %>
+          </marquee>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
 
 <section id="sliderSection">
   <div class="row">
@@ -83,8 +98,7 @@
       <div class="latest_post">
         <h2><span>Latest Videos</span></h2>
         <div class="latest_post_container">
-          <ul class="latest_postnav">
-            <li>
+          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="400">
               <% obj.each do |art| %>
                   <% if art.video? %>
                       <div class="row" style="margin-bottom: 10px">
@@ -97,10 +111,12 @@
                       </div>
                   <% end %>
               <% end %>
-            </li>
-          </ul>
+           </marquee>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+
+

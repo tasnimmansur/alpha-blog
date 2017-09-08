@@ -40,15 +40,16 @@
           </ul>
         </li>
 
-        <li>
-          <%= form_tag(categories_path, :method => "get", id: "search-form") do %>
-            <%= text_field_tag :search, params[:search], placeholder: "Search" %>
-            <%= submit_tag "Search", :name => nil %>
-          <% end %>
-
+        <li style="margin-top: 12px">
           <%#= form_tag(categories_path, :method => "get", id: "search-form") do %>
-              <%#= text_field_tag :search, params[:search], placeholder: "Search" %>
-              <%#= submit_tag "Search", :name => nil %>
+            <%#= text_field_tag :search, params[:search], placeholder: "Search" %>
+            <%#= submit_tag "Search", :name => nil %>
+
+
+          <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+              <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+              <%= submit_tag "Search", :name => nil %>
+          <% end %>
         </li>
       </ul>
 

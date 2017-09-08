@@ -6,7 +6,7 @@ class ArticlesController <ApplicationController
 
   def index
     #@articles = Article.paginate(page: params[:page], per_page: 20)
-    @articles = Article.search(params[:search]).paginate(page: params[:page], per_page: 20).order("created_at DESC")
+    @articles = Article.search(params[:search]).paginate(page: params[:page], per_page: 25).order("created_at DESC")
   end
 
   def new
