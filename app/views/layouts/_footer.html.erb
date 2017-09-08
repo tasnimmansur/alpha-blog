@@ -17,6 +17,7 @@
             <% end %>
 
             <li><%= link_to "News", articles_path %></li>
+            <li><%= link_to "Agencies", users_path %></li>
             <% if logged_in? %>
               <li><%= link_to 'Log out', logout_path, method: :delete %></li>
             <% else %>
@@ -32,7 +33,7 @@
           <h2>Contact</h2>
           <p>News Website for all.</p>
           <address>
-            Perfect News,1238 S . 123 St.Suite 25 Town City 3333,Surat Phone: 123-326-789 Fax: 123-546-567
+            Perfect News, Town City 3333,Surat Phone: 123-326-789 Fax: 123-546-567
           </address>
         </div>
       </div>

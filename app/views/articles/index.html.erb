@@ -7,11 +7,17 @@
 <# render 'article', obj: @articles %>
 
 <div align="center">
-  <# will_paginate %>
+  <%#= will_paginate %>
 </div>-->
 
 
 <%= render 'article', obj: @articles %>
+
+
+<% if @articles.blank? %>
+    <h4>There are no news containing the term <%= params[:search] %>.</h4>
+<% end %>
+
 
 <div align="center">
   <%= will_paginate %>

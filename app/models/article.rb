@@ -15,10 +15,6 @@ class Article <ActiveRecord::Base
   #end
 
   def self.search(search)
-    if search.present?
-      Article.where('title LIKE ?', "%#{search}%")
-    else
-      Article.all
-    end
+    where("title LIKE ?", "%#{search}%")
   end
 end

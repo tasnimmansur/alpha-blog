@@ -39,7 +39,19 @@
             <% end %>
           </ul>
         </li>
+
+        <li>
+          <%= form_tag(categories_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+            <%= submit_tag "Search", :name => nil %>
+          <% end %>
+
+          <%#= form_tag(categories_path, :method => "get", id: "search-form") do %>
+              <%#= text_field_tag :search, params[:search], placeholder: "Search" %>
+              <%#= submit_tag "Search", :name => nil %>
+        </li>
       </ul>
+
 
       <!--<form class="navbar-form navbar-left">
         <div class="form-group">

@@ -46,4 +46,9 @@
     <%= will_paginate %>
   </div>
 
+
+  <% if @categories.blank? %>
+      <h4>There are no category containing the term <%= params[:search] %>.</h4>
+  <% end %>
+
 </section>
