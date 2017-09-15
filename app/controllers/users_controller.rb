@@ -16,12 +16,14 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      cookies.signed[:user_id] = @user.id
       flash[:success] = "Welcome to the alpha blog #{@user.username}"
       redirect_to articles_path
     else
       render 'new'
     end
   end
+
 
   def edit
   end

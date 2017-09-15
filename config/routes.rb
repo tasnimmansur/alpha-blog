@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       put "like", to: "articles#upvote"
       put "dislike", to: "articles#downvote"
     end
+    resources :comments, only: [:create]
   end
 
   get 'signup', to: 'users#new'
@@ -18,6 +19,10 @@ Rails.application.routes.draw do
 
   resources :categories, except: [:destroy]
 
+  mount ActionCable.server => '/cable'
+
+  get '/chat', to: 'chatrooms#show'
+  resources :messages, only: [:create]
 end
 
 

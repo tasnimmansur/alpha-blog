@@ -25,7 +25,8 @@
                       <%= link_to dislike_article_path(article), method: :put do %>
                           <i class="glyphicon glyphicon-thumbs-down" style="color: white"></i>&nbsp;
                           <b style="color: white"><%= article.get_downvotes.size %></b>
-                      <% end %>
+                      <% end %>&nbsp;
+                      <b style="color: white">|&nbsp;<%= pluralize(article.comments.count, 'Comment') %></b>
                     </div>
                   </div>
                 </div>
@@ -70,8 +71,6 @@
     </div>
   </div>
 </section>
-
-
 
 <section id="sliderSection">
   <div class="row">

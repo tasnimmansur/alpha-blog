@@ -9,6 +9,12 @@ class ArticlesController <ApplicationController
     @articles = Article.search(params[:search]).paginate(page: params[:page], per_page: 25).order("created_at DESC")
   end
 
+  def show
+    @articles = Article.all
+    @comment = Comment.new
+    @comments = @article.comments.paginate(page:params[:page], per_page: 5)
+  end
+
   def new
     @article = Article.new
   end
@@ -34,10 +40,6 @@ class ArticlesController <ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def show
-    @articles = Article.all
   end
 
   def destroy

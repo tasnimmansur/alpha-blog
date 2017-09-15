@@ -2,6 +2,7 @@
   <div class="row">
     <% obj.in_groups(2,false).each do |group| %>
         <div class="col-lg-4 col-md-4 col-sm-4">
+
           <% group.each do |article| %>
               <div class="slick_slider">
                 <div class="single_iteam">
@@ -14,7 +15,7 @@
                     <p><%= article.user.username if article.user %>  -
                       <span class="quiet"><small><%= time_ago_in_words(article.created_at) %> ago</small></span>
                     </p><br/>
-                    <p><%= truncate article.description, length:100 %></p><br/>
+                    <p><%= truncate article.description, length:75 %></p><br/>
 
                     <div class="article-body-like">
                       <%= link_to like_article_path(article), method: :put do %>
@@ -24,7 +25,8 @@
                       <%= link_to dislike_article_path(article), method: :put do %>
                           <i class="glyphicon glyphicon-thumbs-down" style="color: white"></i>&nbsp;
                           <b style="color: white"><%= article.get_downvotes.size %></b>
-                        <% end %>
+                      <% end %>&nbsp;
+                      <b style="color: white">|&nbsp;<%= pluralize(article.comments.count, 'Comment') %></b>
                     </div>
                   </div>
                 </div>
@@ -37,63 +39,33 @@
       <div class="latest_post">
         <h2><span>Latest News</span></h2>
         <div class="latest_post_container">
-          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="530">
-              <% obj.each do |art| %>
+          <!--<ul>
+            <li>
+              <#% obj.each do |art| %>
                   <div class="row" style="margin-bottom: 10px">
                     <div class="media col-md-4">
-                      <%= link_to article_path(art) do %>
-                          <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
-                      <% end %>
+                      <%#= link_to article_path(art) do %>
+                          <%#= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                      <#% end %>
                     </div>
-                    <div class="col-md-8" style="padding: 0;"><h4><%= link_to art.title, article_path(art) %></h4></div>
+                    <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%#= link_to art.title, article_path(art) %></h4></i></b></div>
                   </div>
-              <% end %>
-           </marquee>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contentSection">
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-      <div class="left_content">
-        <div class="single_post_content">
-          <h2><span><%= @category.name %></span></h2>
-          <div class="single_post_content_left">
-            <ul class="business_catgnav  wow fadeInDown">
-              <li>
-                <% obj.first(1).each do |article| %>
-                    <figure class="bsbig_fig"><%= link_to article_path(article) do %>
-                          <%= image_tag (article.picture.url) if article.picture? %>
-                      <% end %>
-                      <figcaption><%= link_to article.title, article_path(article) %></figcaption>
-                      <p><%= truncate article.description, length:50 %></p>
-                    </figure>
-                <% end %>
-              </li>
-            </ul>
-          </div>
-
-          <div class="single_post_content_right">
-            <ul class="spost_nav">
-              <% obj.each.with_index do |art, index| %>
-                  <% if index != 0 %>
-                      <li>
-                        <div class="row" style="margin-bottom: 10px">
-                          <div class="media col-md-4">
-                            <%= link_to article_path(art) do %>
-                                <%= image_tag(art.picture.url, height: '90', width: '125') if art.picture?%>
-                            <% end %>
-                          </div>
-                          <div class="col-md-8" style="padding: 0;"><b style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></b></div>
-                        </div>
-                      </li>
-                  <% end %>
-              <% end %>
-            </ul>
-          </div>
+              <#% end %>
+            </li>
+          </ul>
+          <ul>-->
+          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="400">
+            <% obj.each do |art| %>
+                <div class="row" style="margin-bottom: 10px">
+                  <div class="media col-md-4">
+                    <%= link_to article_path(art) do %>
+                        <%= image_tag(art.picture.url, height: '85', width: '100') if art.picture?%>
+                    <% end %>
+                  </div>
+                  <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+                </div>
+            <% end %>
+          </marquee>
         </div>
       </div>
     </div>
@@ -108,11 +80,13 @@
         <% obj.in_groups_of(1,false).each do |group| %>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <% group.each do |article| %>
-                  <div class="slick_slider">
-                    <div class="single_iteam" style="height: 200px; width: 250px;">
-                      <%= (video_tag article.video.url, controls: true, type: "video/mp4", height: '200', width: '330') if article.video? %>
-                    </div>
-                  </div>
+                  <% if article.video? %>
+                      <div class="slick_slider">
+                        <div class="single_iteam" style="height: 200px; width: 250px;">
+                          <%= (video_tag article.video.url, controls: true, type: "video/mp4", height: '200', width: '330') if article.video? %>
+                        </div>
+                      </div>
+                  <% end %>
               <% end %>
             </div>
         <% end %>
@@ -123,26 +97,25 @@
       <div class="latest_post">
         <h2><span>Latest Videos</span></h2>
         <div class="latest_post_container">
-          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="430">
-              <% obj.each do |art| %>
-                  <% if art.video? %>
-                      <div class="row" style="margin-bottom: 10px">
-                        <div class="media col-md-4">
-                          <%= link_to article_path(art) do %>
-                              <%= video_tag(art.video.url, height: '85', width: '100') if art.video?%>
-                          <% end %>
-                        </div>
-                        <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+          <marquee scrolldelay="" scrollamount="4" direction="up" onmouseover="this.setAttribute('scrollamount', 4, 0);" onmouseout="this.setAttribute('scrollamount', 4, 0);" behavior="scroll" height="400">
+            <% obj.each do |art| %>
+                <% if art.video? %>
+                    <div class="row" style="margin-bottom: 10px">
+                      <div class="media col-md-4">
+                        <%= link_to article_path(art) do %>
+                            <%= video_tag(art.video.url, height: '85', width: '100') if art.video?%>
+                        <% end %>
                       </div>
-                  <% end %>
-              <% end %>
+                      <div class="col-md-8" style="padding: 0;"><b><i style="font-size: small"><h4><%= link_to art.title, article_path(art) %></h4></i></b></div>
+                    </div>
+                <% end %>
+            <% end %>
           </marquee>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 
 
 

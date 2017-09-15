@@ -20,9 +20,9 @@
           <li><%= link_to "New News", login_path %></li>
         <% end %>
 
-
         <% if logged_in? %>
           <li><%= link_to "Agencies", users_path %></li>
+            <li><%= link_to "UserChat", chat_path %></li>
         <% end %>
 
         <li class="dropdown">

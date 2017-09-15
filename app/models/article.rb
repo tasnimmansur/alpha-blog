@@ -1,6 +1,7 @@
 class Article <ActiveRecord::Base
   belongs_to :user, optional: true
   has_many :article_categories
+  has_many :comments, dependent: :destroy
   has_many :categories, through: :article_categories
   mount_uploader :picture, PictureUploader
   mount_uploader :video, VideoUploader
