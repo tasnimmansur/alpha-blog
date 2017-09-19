@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       cookies.signed[:user_id] = @user.id
-      flash[:success] = "Welcome to the alpha blog #{@user.username}"
+      flash[:success] = "Welcome to the News #{@user.username}"
       redirect_to articles_path
     else
       render 'new'
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    flash[:danger] = "User and All articles created by user have been deleted"
+    flash[:danger] = "User and All News created by user have been deleted"
     redirect_to users_path
   end
 
