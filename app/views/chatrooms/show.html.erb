@@ -6,11 +6,11 @@
     </div>
     <hr />
     <div class="message-container">
-      <%= form_for(@message, remote: true,
-                   :html => {class: "form-horizontal", role: "form"}) do |f| %>
-          <%= f.text_area :content, class: "form-control",
-                          data: { behavior: "room_speaker" },
-                          placeholder: "Say something!" %>
+      <%= form_for(@message, remote: true,:html => {class: "form-horizontal", role: "form"}) do |f| %>
+          <div class="emoji-picker-container" style="min-width: 600px">
+            <%= f.text_area :content, class: 'form-control', data: { emojiable: true, behavior: "room_speaker" },
+                            placeholder: "Say something" %>
+          </div>
           <%= f.submit "Send", class: 'btn btn-primary',
                        data: { send: "message" } %>
       <% end %>

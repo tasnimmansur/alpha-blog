@@ -6,7 +6,17 @@
           <ol class="breadcrumb">
             <li><%= link_to "Home", root_path %></li>
             <li><%= render @article.categories %></li>
+
+            <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
+                <%= link_to "", article_path(@article), method: :delete,
+                            data: { confirm: "Are you sure you want to delete the article?"},
+                            class: "glyphicon glyphicon-trash icon", style: "color" %>
+                <%= link_to "", edit_article_path(@article), class: "glyphicon glyphicon-pencil icon" %>
+            <% end %>
+
+            <%= link_to "", articles_path, class: "glyphicon glyphicon-home icon" %>
           </ol>
+
           <h1><%= @article.title %></h1>
           <div class="post_commentbox"><i class="fa fa-user"><%= link_to @article.user.username, user_path(@article.user) %></i><span><i class="fa fa-calendar"></i><%= time_ago_in_words(@article.created_at) %> ago</span><i class="fa fa-tags"></i><%= render @article.categories %></a> </div>
           <div class="single_page_content">
@@ -16,17 +26,6 @@
 
           <div class="single_page_content">
             <%= (video_tag @article.video.url, controls: true, type: ["video/mp4", "video/mp3", "video/mkv", "video/3gp"]) if @article.video? %>
-          </div>
-
-          <div class="article-actions">
-            <% if logged_in? && (current_user == @article.user || current_user.admin?) %>
-                <%= link_to "Edit this News", edit_article_path(@article), class: "btn btn-xs btn-primary" %>
-                <%= link_to "Delete this News", article_path(@article), method: :delete,
-                            data: { confirm: "Are you sure you want to delete the article?"},
-                            class: "btn btn-xs btn-danger" %>
-            <% end %>
-
-            <%= link_to "View all News", articles_path, class: "btn btn-xs btn-success" %>
           </div>
 
           <div class="single_page_content">
@@ -40,7 +39,9 @@
                       </div>
 
                       <div class="col-sm-8">
-                        <%= f.text_area :description,rows:8, class: "form-control", placeholder: "Enter Comment Here" %>
+                        <p class="emoji-picker-container">
+                          <%= f.text_area :description, class: 'form-control', data: { emojiable: true }, placeholder: "Enter Comment Here", rows:8 %>
+                        </p>
                       </div>
                     </div>
 

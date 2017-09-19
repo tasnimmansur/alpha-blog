@@ -9,12 +9,12 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//= require jquery
+//= require a_jquery.min
 //= require bootstrap-sprockets
 //= require rails-ujs
 //= require turbolinks
+//= require rails_emoji_picker
 //= require_tree .
-
 
 function scrollToBottom(){
     if($('#messages').length > 0) {
@@ -43,6 +43,3 @@ $(document).ready(function() {
     })
     scrollToBottom();
 });
-
-
-

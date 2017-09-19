@@ -14,6 +14,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'will_paginate', '3.1.5'
 gem 'bootstrap-will_paginate', '0.0.10'
+gem 'rails_emoji_picker'
 
 
 # Use Puma as the app server

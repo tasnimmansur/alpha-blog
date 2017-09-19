@@ -1,6 +1,6 @@
 <section id="sliderSection">
   <div class="row">
-    <% @articles.in_groups(2,false).each do |group| %>
+    <% obj.in_groups(2,false).each do |group| %>
         <div class="col-lg-4 col-md-4 col-sm-4">
 
           <% group.each do |article| %>
@@ -24,7 +24,7 @@
                       <% end %>&nbsp;&nbsp;
                       <%= link_to dislike_article_path(article), method: :put do %>
                           <i class="glyphicon glyphicon-thumbs-down" style="color: white"></i>&nbsp;
-                          <b style="color: white"><%= article.get_downvotes.size %></b>
+                          <b style="color: white "><%= article.get_downvotes.size %></b>
                       <% end %>&nbsp;
                       <b style="color: white">|&nbsp;<%= pluralize(article.comments.count, 'Comment') %></b>
                     </div>
@@ -116,6 +116,3 @@
     </div>
   </div>
 </section>
-
-
-

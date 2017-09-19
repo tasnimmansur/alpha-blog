@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       put "like", to: "articles#upvote"
       put "dislike", to: "articles#downvote"
     end
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
 
   get 'signup', to: 'users#new'

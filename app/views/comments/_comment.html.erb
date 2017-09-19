@@ -6,11 +6,15 @@
   </div>
 
   <div class="col-md-8 well">
-    <p><%= comment.description %></p>
+    <%= content_with_emoji(comment.description) %>
     <p>
       <span class="quiet">
         <small>Created: <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.username %></small>
       </span>
+    </p>
+
+    <p>
+      <%= link_to "", [comment.article, comment], :method => :delete, data: { confirm: 'Are you sure?' },class: "glyphicon glyphicon-trash", remote: true %>
     </p>
   </div>
 </div>

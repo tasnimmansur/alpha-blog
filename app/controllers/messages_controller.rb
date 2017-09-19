@@ -8,6 +8,7 @@ class MessagesController < ApplicationController
       ActionCable.server.broadcast 'chatroom_channel',
                                    message: render_message(@message),
                                    user: @message.user.username
+      #ActionCable.server.broadcast 'chatroom_channel', render(partial: 'message', object: @message)
     else
       render 'chatrooms/show'
     end
