@@ -10,14 +10,16 @@
         <div class="footer_widget wow fadeInDown">
           <h2>Tag</h2>
           <ul class="tag_nav">
+            <li><%= link_to "News", articles_path %></li>
             <% if logged_in? %>
                 <li><%= link_to "New News", new_article_path %></li>
             <% else %>
                 <li><%= link_to "New News", login_path %></li>
             <% end %>
 
-            <li><%= link_to "News", articles_path %></li>
+
             <li><%= link_to "Agencies", users_path %></li>
+            <li><%= link_to "UserChat", chat_path %></li>
             <% if logged_in? %>
               <li><%= link_to 'Log out', logout_path, method: :delete %></li>
             <% else %>
