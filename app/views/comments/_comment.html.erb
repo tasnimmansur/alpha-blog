@@ -8,7 +8,9 @@
   <div class="col-md-8 well">
     <%= content_with_emoji(comment.description) %>
     <p style="float: right">
-      <%= link_to "", [comment.article, comment], :method => :delete, data: { confirm: 'Are you sure?' },class: "glyphicon glyphicon-trash", remote: true %>
+      <% if logged_in? && (current_user == comment.user || current_user.admin?) %>
+        <%= link_to "", [comment.article, comment], :method => :delete, data: { confirm: 'Are you sure?' },class: "glyphicon glyphicon-trash", remote: true %>
+      <% end %>
     </p>
     <p>
       <span class="quiet">
